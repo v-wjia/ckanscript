@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="zh_CN" class="ie ie7"> <![endif]-->
+<!--[if IE 8]> <html lang="zh_CN" class="ie ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="zh_CN" class="ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="zh_CN"> <!--<![endif]-->
+  <head>
+    <!--[if lte ie 8]><script type="text/javascript" src="/fanstatic/vendor/:version:2016-11-12T13:11:14/html5.min.js"></script><![endif]-->
+<link rel="stylesheet" type="text/css" href="/fanstatic/vendor/:version:2016-11-12T13:11:14/select2/select2.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/css/:version:2016-11-18T15:28:16/main.min.css" />
+<link rel="stylesheet" type="text/css" href="/fanstatic/vendor/:version:2016-11-12T13:11:14/font-awesome/css/font-awesome.min.css" />
+<!--[if ie 7]><link rel="stylesheet" type="text/css" href="/fanstatic/vendor/:version:2016-11-12T13:11:14/font-awesome/css/font-awesome-ie7.min.css" /><![endif]-->
+
+    <meta charset="utf-8" />
+      <meta name="generator" content="ckan 2.4.4" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导入 - CKAN</title>
+    <link rel="shortcut icon" href="/base/images/ckan.ico" />
+    <style>
+        body{
+	font-family: "\5FAE\8F6F\96C5\9ED1";
+}
+.site-footer {background: #2e313a;}
+.masthead {background: #2e313a; min-height:50px;}
+.account-masthead {background: #2e313a;}
+.account-masthead .account ul li a {color:#ffffff;}
+.account-masthead .account ul li {border-left:0 solid #842f22}
+.masthead input[type="text"] {border-color:#ffffff}
+.site-footer a {color:#ffffff;}
+.site-footer, .site-footer label, .site-footer small{color:#ffffff;}
+.logo img{margin-top:-18px;}
+.masthead .navigation .nav-pills{margin-top:-25px;}
+.confootbg{background:#2e3139 none repeat scroll 0 0;}
+.con{width:100%}
+.confoot{color: #fff;
+    height: 160px;
+    margin: 0 auto;
+    position: relative;
+    width: 1024px;}
+.confoot .foot1{    float: left;
+    font-family: Tahoma,Geneva,sans-serif;
+    font-size: 12px;
+    line-height: 200%;
+    margin-top: 38px;
+    width: 590px;}
+.confoot .foot2{    float: left;
+    margin-top: 50px;
+    width: 140px;}
+.confoot .foot3{    float: right;
+    margin-top: 18px;
+    width: 240px;}
+.confoot .foot3 .foot3div {
+    float: right;
+    text-align: center;
+}
+.lang-select{display:none;}
+.hero {
+    background: rgba(0, 0, 0, 0) url("../../../base/images/c3bg.png") repeat scroll 0 0;
+}
+[role="main"], .main {background: #fff;}
+.homepage [role="main"] {
+    padding: 0;
+}
+html{background:#323a44;}
+body{background:#323a44;}
+.header-image{
+    position: absolute;
+    top:10px;
+}  
+.header-image img:first-child {
+    border-right: 2px solid #565656;
+    float: left;
+    padding-right: 10px;
+}
+.header-image img:last-child {
+    float: left;
+    padding-left: 10px;
+}
+.nav-pills{
+    font-size: 14px;
+    line-height: 250%;
+    position: absolute;
+    top: 50px;
+}
+
+.nav-pills > li > a {
+    color: #8a9cae;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 200%;
+    text-decoration: none;
+}
+.nav-pills > li > a.active{
+    border-bottom: 2px solid #01a6dc;
+    color: #fff;
+}
+.nav-pills > li > a.hover{
+    color: #8a9cae;
+    border-bottom: 2px solid #01a6dc;
+}
+.masthead {
+    min-height: 90px;
+}
+.masthead .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li.active a{
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 200%;
+    text-decoration: none;
+background-color:#2e313a;
+height:18px;
+margin-top:10px;
+}
+.masthead .navigation .nav-pills li.active, .masthead .navigation .nav-pills li:hover{
+    border-bottom: 2px solid #01a6dc;
+    color: #fff;
+}
+
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+box-shadow:none;
+}
+.masthead .nav > li > a, .masthead .nav > li > a:focus, .masthead .nav > li > a:hover, .masthead .nav > .active > a, .masthead .nav > .active > a:hover, .masthead .nav > .active > a:focus {
+    color: #8a9cae;
+    text-shadow: none;
+}
+.navbar .nav > li > a {
+height:18px;
+margin-top:10px;
+}
+.masthead .navigation {
+margin-right：315px;
+}
+.navbar .nav > li {
+    margin-left: 20px;
+}
+
+      </style>
+    
+  </head>
+  
+  <body data-site-root="http://10.0.13.23/" data-locale-root="http://10.0.13.23/" >
+
+    <div class="hide"><a href="#content">Skip to content</a></div>
+    
+{% if c.userobj.sysadmin %}
+  <header class="account-masthead">
+    <div class="container">
+      
+        
+          <div class="account avatar authed" data-module="me" data-me="4834dc15-0b9a-428c-bc12-2bcc73b9327a">
+            <ul class="unstyled">
+              
+                <li>
+                  <a href="/ckan-admin" title="系统管理员设置">
+                    <i class="icon-legal" aria-hidden="true"></i>
+                    <span class="text">管理员</span>
+                  </a>
+                </li>
+              
+              <li>
+                <a href="/user/wjia" class="image" title="浏览个人资料">
+                  <img src="//gravatar.com/avatar/b5089b7cd8ee5f51b4eb7f266cf17d0d?s=22&amp;d=identicon"
+        class="gravatar" width="22" height="22" />
+                  <span class="username">asdfasdf</span>
+                </a>
+              </li>
+              
+              <li class="notifications ">
+                
+                <a href="/dashboard" title="控制台(0 新项目)">
+                  <i class="icon-dashboard" aria-hidden="true"></i>
+                  <span class="text">仪表盘</span>
+                  <span class="badge">0</span>
+                </a>
+              </li>
+              
+                <li>
+                  <a href="/user/edit/wjia" title="编辑设置">
+                    <i class="icon-cog" aria-hidden="true"></i>
+                    <span class="text">设置</span>
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="/user/_logout" title="登出">
+                    <i class="icon-signout" aria-hidden="true"></i>
+                    <span class="text">登出</span>
+                  </a>
+                </li>
+              
+              
+            </ul>
+          </div>
+        
+      
+    </div>
+  </header>
+
+<header class="navbar navbar-static-top masthead">
+  <div class="container">
+    <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    
+    <hgroup class="header-image pull-left">
+          <a class="logo" href="/"><img src="/base/images/logo_cq.png" alt="CKAN" title="CKAN" /></a>
+          <a class="logo" href="/"><img src="/base/images/ckan-logo.png" alt="CKAN" title="CKAN" style="margin-right:0;border-right:0" /></a>
+    </hgroup>
+
+    <div class="nav-collapse collapse">
+        <nav class="section navigation">
+          <ul class="nav nav-pills">
+              <li><a href="/dataset">数据集</a></li><li><a href="/organization">机构</a></li><li><a href="/group">群组</a></li><li><a href="/about">关于</a></li><li><a href="/base/import.html" class="active">导入</a></li>
+          </ul>
+        </nav>
+
+        <form class="section site-search simple-input" action="/dataset" method="get">
+          <div class="field">
+            <label for="field-sitewide-search">搜索数据集</label>
+            <input id="field-sitewide-search" type="text" name="q" placeholder="搜索" />
+            <button class="btn-search" type="submit"><i class="icon-search"></i></button>
+          </div>
+        </form> 
+
+    </div>
+  </div>
+</header>
+  
+    <div role="main">
+      <div id="content" class="container">
+            <div class="flash-messages">
+            </div> 
+            <div class="toolbar">
+                  <ol class="breadcrumb">
+                    
+<!-- Snippet snippets/home_breadcrumb_item.html start -->
+
+<li class="home"><a href="/"><i class="icon-home"></i><span> 首页</span></a></li>
+<!-- Snippet snippets/home_breadcrumb_item.html end -->
+                    
+  <li class="active"><a class=" active" href="/about">导入</a></li>
+                  </ol>
+            </div>
+          
+          <div class="row wrapper no-nav">
+     
+  <article class="module">
+    <div class="module-content">
+      
+        
+          <h1 class="page-heading">导入MSSQLSERVER数据</h1>
+          <form method="post" id="form-purge-packages" action="">
+  
+  <div class="control-group control-medium">
+    <label class="control-label" for="field-ckan-site-title">数据库服务器地址</label>
+    <div class="controls ">
+    <input id="field-ckan-site-title" type="text" name="host" value="" placeholder="" id="host">
+    </div>
+  </div>
+  
+  <div class="control-group control-medium">
+    <label class="control-label" for="field-ckan-site-title">数据库服务器数据库名称</label>
+    <div class="controls ">
+    <input id="field-ckan-site-title" type="text" name="dbname" value="" placeholder="" id="dbname">
+    </div>
+  </div>
+  
+  <div class="control-group control-medium">
+    <label class="control-label" for="field-ckan-site-title">数据库服务器用户名</label>
+    <div class="controls ">
+    <input id="field-ckan-site-title" type="text" name="user" value="" placeholder="" id="user">
+    </div>
+  </div>  
+  
+  <div class="control-group control-medium">
+    <label class="control-label" for="field-ckan-site-title">数据库服务器密码</label>
+    <div class="controls ">
+    <input id="field-ckan-site-title" type="password" name="password" value="" placeholder="" id="password">
+    </div>
+  </div> 
+
+  <div class="control-group control-medium">
+    <label class="control-label" for="field-ckan-site-title">数据库服务器数据表名称</label>
+    <div class="controls ">
+    <input id="field-ckan-site-title" type="text" name="tablename" value="" placeholder="" id="tablename">
+    </div>
+  </div>  
+    <button
+      type="submit"
+      name="purge-packages"
+      value="import"
+      class="btn btn-danger"
+	  id="submitbt"
+      >
+      导入
+    </button>
+	
+	<div id="showmessage">
+	{% if result == 0 %}
+	数据导入成功
+	{% endif %}
+	
+	</div>
+  </form>
+
+    </div>
+  </article>
+
+
+            
+          </div>
+        
+      </div>
+    </div>
+  
+
+<style>
+ol, ul {
+    list-style: outside none none;
+}
+/* footer start */
+.footer-container{
+	background: #323a44;
+	height: 168px;
+}
+.footer{
+	position: relative;
+	height: 100%;
+	width:1000px; 
+	margin:0 auto;
+}
+.footer-logo{
+	position: absolute;
+	top: 24px
+}
+
+.footer-logo ~ img{
+	float: left;
+}
+.footer-logo img:first-child{
+	padding-right: 14px;
+	border-right: 2px solid #565656; 
+	float: left;
+}
+
+.footer-logo img:last-child{
+	padding-left: 14px;
+	padding-top: 4px;
+	float: left;
+}
+.copy-info{
+	position: absolute;
+	top: 64px;
+	font-size: 12px;
+	color: #fff;
+	line-height: 180%;
+}
+.wecode{
+	position: absolute;
+	top: 20px;
+	right: 0;
+}
+.wecode > ul > li{
+	float: left;
+	width: 100px;
+	text-align: center;
+	margin-right: 20px;
+	font-size: 12px;
+	color: #fff;
+	position: relative;
+}
+.wecode > ul > li:last-child{
+	margin-right: 0;
+}
+.wecode > ul > li > img{
+	display: block;
+	margin:0 auto;
+}
+.wecode > ul > li > p{
+	margin-top: 12px;
+	line-height: 180%
+}
+/* footer end */    
+</style>
+<div class="footer-container">
+		<div class="footer">
+			<div class="footer-logo">
+				<img src="/base/images/chinacqlogo_1.png" alt="" />
+				<img src="/base/images/MSFT_logo_rgb.png" alt="" />
+			</div>
+			<div class="copy-info">
+				<p>Copyright 2015 www.cq.gov.cn All Rights Reserved.</p>
+				<p>重庆市人民政府版权所有 重庆市人民政府办公厅主办</p>
+				<p>ICP备案：渝ICP备05003300号</p>
+				<p>国际联网备案：渝公网备500000012-00013</p>
+			</div>
+			<div class="wecode">
+				<ul>
+					<li>
+						<img src="/base/images/2-D_1.png" alt="" />
+						<p>重庆市政府网<br />新浪微博</p>
+					</li>
+					<li>
+						<img src="/base/images/2-D_2.png" alt="" />
+						<p>重庆市政府网<br />腾讯微博</p>
+					</li>
+					<li>
+						<img src="/base/images/2-D_3.png" alt="" />
+						<p>Microsoft云科技<br />官方微信</p>
+					</li>
+					<li>
+						<img src="/base/images/2-D_4.png" alt="" />
+						<p>Microsoft<br />亚太云生态</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+</div>
+  
+      
+<script>document.getElementsByTagName('html')[0].className += ' js';</script>
+<script type="text/javascript" src="/fanstatic/vendor/:version:2016-11-12T13:11:14/jquery.min.js"></script>
+<script type="text/javascript" src="/fanstatic/vendor/:version:2016-11-12T13:11:14/:bundle:bootstrap/js/bootstrap.min.js;jed.min.js;moment-with-locales.js;select2/select2.min.js"></script>
+<script type="text/javascript" src="/fanstatic/base/:version:2016-11-12T13:11:14/:bundle:plugins/jquery.inherit.min.js;plugins/jquery.proxy-all.min.js;plugins/jquery.url-helpers.min.js;plugins/jquery.date-helpers.min.js;plugins/jquery.slug.min.js;plugins/jquery.slug-preview.min.js;plugins/jquery.truncator.min.js;plugins/jquery.masonry.min.js;plugins/jquery.form-warning.min.js;sandbox.min.js;module.min.js;pubsub.min.js;client.min.js;notify.min.js;i18n.min.js;main.min.js;modules/select-switch.min.js;modules/slug-preview.min.js;modules/basic-form.min.js;modules/confirm-action.min.js;modules/api-info.min.js;modules/autocomplete.min.js;modules/custom-fields.min.js;modules/data-viewer.min.js;modules/table-selectable-rows.min.js;modules/resource-form.min.js;modules/resource-upload-field.min.js;modules/resource-reorder.min.js;modules/resource-view-reorder.min.js;modules/follow.min.js;modules/activity-stream.min.js;modules/dashboard.min.js;modules/resource-view-embed.min.js;view-filters.min.js;modules/resource-view-filters-form.min.js;modules/resource-view-filters.min.js;modules/table-toggle-more.min.js;modules/dataset-visibility.min.js;modules/media-grid.min.js;modules/image-upload.min.js"></script>
+<script type="text/javascript">
+/*
+$(document).ready(function(){
+	$("#submitbt").click(function(){
+		$.ajax({  
+			 type:'post',  
+			 url:'http://10.0.13.23/base/command.py',  
+			 data:{
+				host:$("#host").val(),
+				dbname:$("#dbname").val(),
+				user:$("#user").val(),
+				password:$("#password").val(),
+				tablename:$("#tablename").val()
+			 },  
+			 cache:false,  
+			 dataType:'json',  
+			 success:function(data){  
+				  if( data.msg =="true" ) 
+				  {  
+					   $("#showmessage").html("<font color='red'>导入成功！</font>");  
+					   return;  
+				   } else {
+						$("#showmessage").html("<font color='red'>导入失败！</font>");
+						return;
+				   }
+			  },  
+			  error:function(){}  
+		});
+	});
+});
+*/    
+</script>
+{% else %}
+<div style="background-color:#fff">
+<a href="/user/login">请先登录系统</a>
+</div>
+{% endif %}   
+</body>
+</html>
